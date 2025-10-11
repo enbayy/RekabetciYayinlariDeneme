@@ -42,9 +42,16 @@ git push -u origin main
 - **Build Command**: `npm run build`
 - **Publish Directory**: `out`
 - **Node Version**: `18`
+- **NPM Version**: `10`
 
 ### 3. Otomatik Deploy
 Netlify otomatik olarak GitHub'dan çekecek ve deploy edecek.
+
+### 4. Sorun Giderme
+Eğer build hatası alırsanız:
+- Node.js versiyonunu 18 olarak ayarlayın
+- NPM versiyonunu 10 olarak ayarlayın
+- `netlify.toml` dosyasının doğru olduğunu kontrol edin
 
 ## 🔧 Yerel Geliştirme
 
