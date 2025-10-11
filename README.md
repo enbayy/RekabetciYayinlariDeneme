@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Deneme Sınav Platformu
 
-## Getting Started
+Modern ve kullanıcı dostu deneme sınav platformu. YKS, TYT, AYT ve branş denemeleri ile sınavlara hazırlanın.
 
-First, run the development server:
+## 🚀 Özellikler
 
+- ✅ **Gerçek Sınav Deneyimi**: 135 dakikalık gerçek sınav koşulları
+- ✅ **Detaylı Analiz**: Her soruda geçirilen süre ve performans analizi
+- ✅ **Soru Navigasyonu**: Alt kısımda soru numaraları ile kolay geçiş
+- ✅ **Responsive Tasarım**: Mobil ve masaüstü uyumlu
+- ✅ **Mavi Tema**: Modern ve profesyonel görünüm
+
+## 🛠️ Teknolojiler
+
+- **Next.js 15** - React framework
+- **Tailwind CSS** - Styling
+- **JavaScript** - Basit ve uyumlu kod
+- **LocalStorage** - Veri saklama
+
+## 📱 Sayfalar
+
+- **Anasayfa** - Tanıtım ve özellikler
+- **Denemeler** - TYT, AYT, Branş denemeleri
+- **Deneme Sınavı** - Gerçek sınav deneyimi
+- **Sonuç** - Detaylı analiz ve istatistikler
+- **Üye Ol/Giriş Yap** - Hesap yönetimi
+- **Hakkımızda/İletişim** - Bilgi sayfaları
+
+## 🚀 Netlify Deploy
+
+### 1. GitHub'a Yükle
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/username/deneme-website.git
+git push -u origin main
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Netlify Ayarları
+- **Build Command**: `npm run build`
+- **Publish Directory**: `out`
+- **Node Version**: `18`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 3. Otomatik Deploy
+Netlify otomatik olarak GitHub'dan çekecek ve deploy edecek.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔧 Yerel Geliştirme
 
-## Learn More
+```bash
+# Bağımlılıkları yükle
+npm install
 
-To learn more about Next.js, take a look at the following resources:
+# Geliştirme sunucusunu başlat
+npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Production build
+npm run build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Static export (Netlify için)
+npm run export
+```
 
-## Deploy on Vercel
+## 📁 Proje Yapısı
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+deneme-website/
+├── src/
+│   ├── app/
+│   │   ├── page.js              # Anasayfa
+│   │   ├── denemeler/
+│   │   │   └── page.js          # Denemeler listesi
+│   │   ├── deneme/
+│   │   │   └── [id]/
+│   │   │       └── page.js      # Deneme sınavı
+│   │   ├── sonuc/
+│   │   │   └── page.js          # Sonuç sayfası
+│   │   ├── uye-ol/
+│   │   │   └── page.js          # Üye ol
+│   │   ├── giris-yap/
+│   │   │   └── page.js          # Giriş yap
+│   │   ├── hakkimizda/
+│   │   │   └── page.js          # Hakkımızda
+│   │   ├── iletisim/
+│   │   │   └── page.js          # İletişim
+│   │   └── layout.js             # Ana layout
+│   └── components/
+│       └── Navbar.js             # Navigasyon
+├── public/                       # Statik dosyalar
+├── next.config.js               # Next.js ayarları
+├── netlify.toml                 # Netlify ayarları
+└── package.json                 # Bağımlılıklar
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎯 Kullanım
+
+1. **Anasayfa**dan denemelere gidin
+2. **Deneme paketi** seçin
+3. **"Denemeye Başla"** butonuna tıklayın
+4. **Sınavı tamamlayın**
+5. **Sonuçlarınızı** görün
+
+## 🔧 Sorun Giderme
+
+### Netlify 404 Hatası
+- `next.config.js` dosyasında `output: 'export'` olduğundan emin olun
+- `netlify.toml` dosyasının doğru ayarları içerdiğini kontrol edin
+- Build command'ın `npm run build` olduğunu doğrulayın
+
+### Build Hatası
+- Node.js versiyonunun 18+ olduğundan emin olun
+- `npm install` komutunu çalıştırın
+- `npm run build` ile test edin
+
+## 📞 Destek
+
+Herhangi bir sorun için iletişim sayfasından bize ulaşabilirsiniz.
+
+---
+
+**Not**: Bu proje tamamen JavaScript ile yazılmıştır ve ECMAScript özellikleri kullanılmamıştır.
