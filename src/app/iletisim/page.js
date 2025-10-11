@@ -145,8 +145,8 @@ export default function Iletisim() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">E-posta</h3>
-                    <p className="text-gray-600">info@denemeplatformu.com</p>
-                    <p className="text-gray-600">destek@denemeplatformu.com</p>
+                    <p className="text-gray-600">info@rekabetciyayinlari.com</p>
+                    <p className="text-gray-600">destek@rekabetciyayinlari.com</p>
                   </div>
                 </div>
 
@@ -163,36 +163,6 @@ export default function Iletisim() {
                   </div>
                 </div>
 
-                <div className="flex items-start">
-                  <div className="bg-blue-100 p-3 rounded-lg mr-4">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Adres</h3>
-                    <p className="text-gray-600">
-                      Maslak Mahallesi<br />
-                      Büyükdere Caddesi No: 123<br />
-                      Sarıyer/İstanbul
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-blue-100 p-3 rounded-lg mr-4">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Çalışma Saatleri</h3>
-                    <p className="text-gray-600">Pazartesi - Cuma: 09:00 - 18:00</p>
-                    <p className="text-gray-600">Cumartesi: 09:00 - 14:00</p>
-                    <p className="text-gray-600">Pazar: Kapalı</p>
-                  </div>
-                </div>
               </div>
             </div>
 

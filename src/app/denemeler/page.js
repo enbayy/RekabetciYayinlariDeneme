@@ -112,35 +112,41 @@ export default function Denemeler() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-primary-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12">
+          <div className="mb-6">
+            <span className="inline-block bg-primary-100 text-primary-700 px-6 py-3 rounded-full text-sm font-semibold mb-4 shadow-soft">
+              🎯 Rekabetçi Yayınları
+            </span>
+          </div>
+          <h1 className="text-5xl font-bold text-neutral-900 mb-6 font-display">
             Deneme Sınavları
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
             YKS hazırlığınız için kaliteli deneme sınavları. 
-            Gerçek sınav deneyimi yaşayın ve performansınızı ölçün.
+            <span className="text-primary-600 font-semibold">Gerçek sınav deneyimi</span> yaşayın ve 
+            <span className="text-primary-600 font-semibold">performansınızı ölçün</span>.
           </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-1/4">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4 text-gray-900">
-                Deneme Kategorileri
+            <div className="bg-white rounded-xl shadow-medium p-6 border border-neutral-200">
+              <h2 className="text-xl font-semibold mb-6 text-neutral-900 font-display">
+                📚 Deneme Kategorileri
               </h2>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {categories.map((category) => (
                   <button
                     key={category.id}
                     onClick={() => setSelectedCategory(category.id)}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                    className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${
                       selectedCategory === category.id
-                        ? 'bg-blue-600 text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-primary-600 text-white shadow-medium'
+                        : 'text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900'
                     }`}
                   >
                     {category.name}

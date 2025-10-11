@@ -4,62 +4,62 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white py-24 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900 pt-8 pb-16 relative overflow-hidden">
         {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.1\'%3E%3Ccircle cx=\'30\' cy=\'30\' r=\'2\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%231D4ED8\' fill-opacity=\'0.1\'%3E%3Ccircle cx=\'30\' cy=\'30\' r=\'2\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
           }}></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
             <div className="mb-6">
-              <span className="inline-block bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
-                🎓 YKS Hazırlık Platformu
+              <span className="inline-block bg-blue-100 text-blue-700 px-6 py-3 rounded-full text-sm font-semibold mb-4 shadow-soft border border-blue-200">
+                🎓 Rekabetçi Yayınları
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Deneme Sınav
-              <span className="block text-blue-200">Platformu</span>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight font-display text-slate-900">
+              Deneme
+              <span className="block text-blue-700">Platformu</span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl mb-8 max-w-4xl mx-auto leading-relaxed text-slate-600">
               YKS, TYT, AYT ve branş denemeleri ile sınavlara hazırlanın. 
-              <span className="text-blue-200 font-semibold">Gerçek sınav deneyimi</span> yaşayın ve 
-              <span className="text-blue-200 font-semibold">performansınızı ölçün</span>.
+              <span className="text-blue-700 font-semibold">Gerçek sınav deneyimi</span> yaşayın ve 
+              <span className="text-blue-700 font-semibold">performansınızı ölçün</span>.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
               <Link
                 href="/denemeler"
-                className="bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="bg-blue-700 hover:bg-blue-800 text-white px-12 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-medium hover:shadow-strong"
               >
                 🚀 Denemelere Başla
               </Link>
               <Link
                 href="/hakkimizda"
-                className="border-2 border-white text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
+                className="border-2 border-blue-700 text-blue-700 px-12 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 hover:border-blue-800 transition-all duration-300 transform hover:scale-105"
               >
                 📚 Daha Fazla Bilgi
               </Link>
             </div>
             
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-200 mb-2">1000+</div>
-                <div className="text-blue-100">Aktif Öğrenci</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              <div className="text-center bg-white rounded-2xl p-8 shadow-medium border border-slate-200 hover:shadow-strong transition-all duration-300 hover:-translate-y-1">
+                <div className="text-4xl md:text-5xl font-bold text-blue-700 mb-3">1000+</div>
+                <div className="text-slate-600 font-semibold text-lg">Aktif Öğrenci</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-200 mb-2">500+</div>
-                <div className="text-blue-100">Deneme Sınavı</div>
+              <div className="text-center bg-white rounded-2xl p-8 shadow-medium border border-slate-200 hover:shadow-strong transition-all duration-300 hover:-translate-y-1">
+                <div className="text-4xl md:text-5xl font-bold text-blue-700 mb-3">500+</div>
+                <div className="text-slate-600 font-semibold text-lg">Deneme Sınavı</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-200 mb-2">50+</div>
-                <div className="text-blue-100">Uzman Eğitmen</div>
+              <div className="text-center bg-white rounded-2xl p-8 shadow-medium border border-slate-200 hover:shadow-strong transition-all duration-300 hover:-translate-y-1">
+                <div className="text-4xl md:text-5xl font-bold text-blue-700 mb-3">50+</div>
+                <div className="text-slate-600 font-semibold text-lg">Uzman Eğitmen</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-200 mb-2">95%</div>
-                <div className="text-blue-100">Memnuniyet</div>
+              <div className="text-center bg-white rounded-2xl p-8 shadow-medium border border-slate-200 hover:shadow-strong transition-all duration-300 hover:-translate-y-1">
+                <div className="text-4xl md:text-5xl font-bold text-blue-700 mb-3">95%</div>
+                <div className="text-slate-600 font-semibold text-lg">Memnuniyet</div>
               </div>
             </div>
           </div>
@@ -67,56 +67,65 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Neden Bizim Platform?
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 font-display">
+              Neden Rekabetçi Yayınları?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
               En kaliteli deneme sınavları ve detaylı analizlerle sınavlara hazırlanın. 
-              <span className="text-blue-600 font-semibold">Teknoloji</span> ile 
-              <span className="text-blue-600 font-semibold">eğitimi</span> birleştiriyoruz.
+              <span className="text-blue-700 font-semibold">Teknoloji</span> ile 
+              <span className="text-blue-700 font-semibold">eğitimi</span> birleştiriyoruz.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-blue-100 to-blue-200 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-blue-100 to-blue-200 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Kaliteli Sorular</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Uzman eğitimciler tarafından hazırlanmış, güncel ve kaliteli sorular. 
-                Her soru gerçek sınav standartlarında test edilmiştir.
+              <h3 className="text-lg font-bold mb-3 text-slate-900">Kaliteli Sorular</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Uzman eğitimciler tarafından hazırlanmış, güncel ve kaliteli sorular.
               </p>
             </div>
 
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-green-100 to-green-200 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Gerçek Sınav Deneyimi</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Gerçek sınav koşullarında deneme yapın ve zaman yönetiminizi geliştirin. 
-                Stres yönetimi ve konsantrasyon becerilerinizi artırın.
+              <h3 className="text-lg font-bold mb-3 text-slate-900">Gerçek Sınav</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Gerçek sınav koşullarında deneme yapın ve zaman yönetiminizi geliştirin.
               </p>
             </div>
 
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-purple-100 to-purple-200 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-purple-100 to-purple-200 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Detaylı Analiz</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Performansınızı detaylı analiz edin ve gelişim alanlarınızı keşfedin. 
-                Kişiselleştirilmiş önerilerle başarınızı artırın.
+              <h3 className="text-lg font-bold mb-3 text-slate-900">Detaylı Analiz</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Performansınızı detaylı analiz edin ve gelişim alanlarınızı keşfedin.
+              </p>
+            </div>
+
+            <div className="text-center group">
+              <div className="bg-gradient-to-br from-orange-100 to-orange-200 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-slate-900">Hızlı Sonuç</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Anında sonuçlar ve detaylı raporlarla performansınızı takip edin.
               </p>
             </div>
           </div>
