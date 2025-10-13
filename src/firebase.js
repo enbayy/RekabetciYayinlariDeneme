@@ -1,5 +1,5 @@
 // src/firebase.js
-import { initializeApp, getApps, getApp } from "firebase/app"; // 👈 Buraya dikkat
+import { initializeApp} from "firebase/app"; // 👈 Buraya dikkat
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
