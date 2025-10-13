@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 export default async function sitemap() {
   const base = 'https://www.rekabetciyayinlari.com';
   const routes = ['', '/denemeler', '/hakkimizda', '/iletisim', '/uye-ol', '/giris-yap']

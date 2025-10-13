@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 export default function robots() {
   const host = 'https://www.rekabetciyayinlari.com';
   return {
