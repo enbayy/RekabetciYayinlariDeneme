@@ -80,27 +80,27 @@ export default function UyeOl() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 text-gray-900 dark:text-slate-100">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4">
             Üye Ol
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 dark:text-slate-300">
             Ücretsiz hesap oluşturun ve deneme sınavlarına başlayın
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Registration Form */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 border border-transparent dark:border-slate-700">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
               Hesap Bilgileri
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                     Ad *
                   </label>
                   <input
@@ -109,8 +109,8 @@ export default function UyeOl() {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                      errors.firstName ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
+                      errors.firstName ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
                     }`}
                     placeholder="Adınız"
                   />
@@ -120,7 +120,7 @@ export default function UyeOl() {
                 </div>
 
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                     Soyad *
                   </label>
                   <input
@@ -129,8 +129,8 @@ export default function UyeOl() {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                      errors.lastName ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
+                      errors.lastName ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
                     }`}
                     placeholder="Soyadınız"
                   />
@@ -141,7 +141,7 @@ export default function UyeOl() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                   E-posta *
                 </label>
                 <input
@@ -150,8 +150,8 @@ export default function UyeOl() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
+                    errors.email ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
                   }`}
                   placeholder="ornek@email.com"
                 />
@@ -161,7 +161,7 @@ export default function UyeOl() {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                   Telefon
                 </label>
                 <input
@@ -170,14 +170,14 @@ export default function UyeOl() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400"
                   placeholder="0555 123 45 67"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                     Şifre *
                   </label>
                   <input
@@ -186,8 +186,8 @@ export default function UyeOl() {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                      errors.password ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
+                      errors.password ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
                     }`}
                     placeholder="En az 6 karakter"
                   />
@@ -197,7 +197,7 @@ export default function UyeOl() {
                 </div>
 
                 <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                     Şifre Tekrar *
                   </label>
                   <input
@@ -206,8 +206,8 @@ export default function UyeOl() {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                      errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
+                      errors.confirmPassword ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
                     }`}
                     placeholder="Şifrenizi tekrar girin"
                   />
@@ -219,7 +219,7 @@ export default function UyeOl() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="school" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="school" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                     Okul
                   </label>
                   <input
@@ -228,13 +228,13 @@ export default function UyeOl() {
                     name="school"
                     value={formData.school}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400"
                     placeholder="Okul adınız"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="grade" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="grade" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                     Sınıf
                   </label>
                   <select
@@ -242,7 +242,7 @@ export default function UyeOl() {
                     name="grade"
                     value={formData.grade}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100"
                   >
                     <option value="">Sınıf seçin</option>
                     <option value="9">9. Sınıf</option>
@@ -263,7 +263,7 @@ export default function UyeOl() {
                   onChange={handleChange}
                   className="mt-1 mr-3"
                 />
-                <label htmlFor="agreeTerms" className="text-sm text-gray-600">
+                <label htmlFor="agreeTerms" className="text-sm text-gray-600 dark:text-slate-300">
                   <Link href="/kullanim-sartlari" className="text-blue-600 hover:underline">
                     Kullanım şartlarını
                   </Link> ve{' '}
@@ -287,66 +287,66 @@ export default function UyeOl() {
 
           {/* Benefits */}
           <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 border border-transparent dark:border-slate-700">
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
                 Üyelik Avantajları
               </h2>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <div className="bg-green-100 dark:bg-green-950 p-2 rounded-lg mr-4">
                     <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Ücretsiz Denemeler</h3>
-                    <p className="text-gray-600 text-sm">Tüm deneme sınavlarına ücretsiz erişim</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">Ücretsiz Denemeler</h3>
+                    <p className="text-gray-600 dark:text-slate-300 text-sm">Tüm deneme sınavlarına ücretsiz erişim</p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <div className="bg-green-100 dark:bg-green-950 p-2 rounded-lg mr-4">
                     <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Detaylı Analiz</h3>
-                    <p className="text-gray-600 text-sm">Performansınızı detaylı analiz edin</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">Detaylı Analiz</h3>
+                    <p className="text-gray-600 dark:text-slate-300 text-sm">Performansınızı detaylı analiz edin</p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <div className="bg-green-100 dark:bg-green-950 p-2 rounded-lg mr-4">
                     <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">İlerleme Takibi</h3>
-                    <p className="text-gray-600 text-sm">Gelişiminizi takip edin</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">İlerleme Takibi</h3>
+                    <p className="text-gray-600 dark:text-slate-300 text-sm">Gelişiminizi takip edin</p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <div className="bg-green-100 dark:bg-green-950 p-2 rounded-lg mr-4">
                     <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">7/24 Destek</h3>
-                    <p className="text-gray-600 text-sm">Her zaman yanınızdayız</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">7/24 Destek</h3>
+                    <p className="text-gray-600 dark:text-slate-300 text-sm">Her zaman yanınızdayız</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-blue-50 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-blue-50 dark:bg-slate-800 rounded-lg p-6 border border-transparent dark:border-slate-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">
                 Zaten Hesabınız Var mı?
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 dark:text-slate-300 mb-4">
                 Hesabınız varsa giriş yaparak deneme sınavlarına başlayabilirsiniz.
               </p>
               <Link

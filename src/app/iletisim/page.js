@@ -33,13 +33,13 @@ export default function Iletisim() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 text-gray-900 dark:text-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4">
             İletişim
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-slate-300 max-w-3xl mx-auto">
             Sorularınız, önerileriniz veya destek talepleriniz için bizimle iletişime geçin. 
             Size en kısa sürede dönüş yapacağız.
           </p>
@@ -47,13 +47,13 @@ export default function Iletisim() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 border border-transparent dark:border-slate-700">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
               Bize Mesaj Gönderin
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                   Ad Soyad
                 </label>
                 <input
@@ -63,13 +63,13 @@ export default function Iletisim() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400"
                   placeholder="Adınızı ve soyadınızı girin"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                   E-posta
                 </label>
                 <input
@@ -79,13 +79,13 @@ export default function Iletisim() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400"
                   placeholder="E-posta adresinizi girin"
                 />
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                   Konu
                 </label>
                 <select
@@ -94,7 +94,7 @@ export default function Iletisim() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100"
                 >
                   <option value="">Konu seçin</option>
                   <option value="genel">Genel Bilgi</option>
@@ -106,7 +106,7 @@ export default function Iletisim() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                   Mesaj
                 </label>
                 <textarea
@@ -116,7 +116,7 @@ export default function Iletisim() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400"
                   placeholder="Mesajınızı buraya yazın"
                 />
               </div>
@@ -132,66 +132,66 @@ export default function Iletisim() {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 border border-transparent dark:border-slate-700">
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
                 İletişim Bilgileri
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <div className="bg-blue-100 p-3 rounded-lg mr-4">
+                  <div className="bg-blue-100 dark:bg-blue-950 p-3 rounded-lg mr-4">
                     <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">E-posta</h3>
-                    <p className="text-gray-600">info@rekabetciyayinlari.com</p>
-                    <p className="text-gray-600">destek@rekabetciyayinlari.com</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">E-posta</h3>
+                    <p className="text-gray-600 dark:text-slate-300">info@rekabetciyayinlari.com</p>
+                    <p className="text-gray-600 dark:text-slate-300">destek@rekabetciyayinlari.com</p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="bg-blue-100 p-3 rounded-lg mr-4">
+                  <div className="bg-blue-100 dark:bg-blue-950 p-3 rounded-lg mr-4">
                     <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Telefon</h3>
-                    <p className="text-gray-600">+90 (212) 555 0123</p>
-                    <p className="text-gray-600">+90 (532) 555 0123</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">Telefon</h3>
+                    <p className="text-gray-600 dark:text-slate-300">+90 (212) 555 0123</p>
+                    <p className="text-gray-600 dark:text-slate-300">+90 (532) 555 0123</p>
                   </div>
                 </div>
 
               </div>
             </div>
 
-            <div className="bg-blue-50 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-blue-50 dark:bg-slate-800 rounded-lg p-6 border border-transparent dark:border-slate-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">
                 Sık Sorulan Sorular
               </h3>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-1">
+                  <h4 className="font-medium text-gray-900 dark:text-slate-100 mb-1">
                     Deneme sınavlarına nasıl erişebilirim?
                   </h4>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 dark:text-slate-300">
                     Ücretsiz üye olduktan sonra denemeler sayfasından istediğiniz sınavı seçebilirsiniz.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-1">
+                  <h4 className="font-medium text-gray-900 dark:text-slate-100 mb-1">
                     Sonuçlarımı nasıl görebilirim?
                   </h4>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 dark:text-slate-300">
                     Sınav tamamlandıktan sonra detaylı sonuçlarınız otomatik olarak gösterilir.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-1">
+                  <h4 className="font-medium text-gray-900 dark:text-slate-100 mb-1">
                     Teknik destek alabilir miyim?
                   </h4>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 dark:text-slate-300">
                     Evet, 7/24 teknik destek hattımızdan yardım alabilirsiniz.
                   </p>
                 </div>

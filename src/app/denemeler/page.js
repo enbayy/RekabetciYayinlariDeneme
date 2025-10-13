@@ -112,19 +112,19 @@ export default function Denemeler() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-primary-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-primary-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 py-8 text-neutral-900 dark:text-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="mb-6">
-            <span className="inline-block bg-primary-100 text-primary-700 px-6 py-3 rounded-full text-sm font-semibold mb-4 shadow-soft">
+            <span className="inline-block bg-primary-100 dark:bg-blue-950 text-primary-700 dark:text-blue-300 px-6 py-3 rounded-full text-sm font-semibold mb-4 shadow-soft">
               🎯 Rekabetçi Yayınları
             </span>
           </div>
-          <h1 className="text-5xl font-bold text-neutral-900 mb-6 font-display">
+          <h1 className="text-5xl font-bold text-neutral-900 dark:text-slate-100 mb-6 font-display">
             Deneme Sınavları
           </h1>
-          <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-neutral-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
             YKS hazırlığınız için kaliteli deneme sınavları. 
             <span className="text-primary-600 font-semibold">Gerçek sınav deneyimi</span> yaşayın ve 
             <span className="text-primary-600 font-semibold">performansınızı ölçün</span>.
@@ -134,8 +134,8 @@ export default function Denemeler() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-1/4">
-            <div className="bg-white rounded-xl shadow-medium p-6 border border-neutral-200">
-              <h2 className="text-xl font-semibold mb-6 text-neutral-900 font-display">
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-medium p-6 border border-neutral-200 dark:border-slate-700">
+              <h2 className="text-xl font-semibold mb-6 text-neutral-900 dark:text-slate-100 font-display">
                 📚 Deneme Kategorileri
               </h2>
               <div className="space-y-3">
@@ -146,7 +146,7 @@ export default function Denemeler() {
                     className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${
                       selectedCategory === category.id
                         ? 'bg-primary-600 text-white shadow-medium'
-                        : 'text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900'
+                        : 'text-neutral-700 dark:text-slate-200 hover:bg-neutral-50 dark:hover:bg-slate-700 hover:text-neutral-900 dark:hover:text-slate-100'
                     }`}
                   >
                     {category.name}
@@ -159,10 +159,10 @@ export default function Denemeler() {
           {/* Main Content */}
           <div className="lg:w-3/4">
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-2">
                 {categories.find(cat => cat.id === selectedCategory)?.name}
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-slate-300">
                 {selectedCategory === 'tyt' && 'Temel Yeterlilik Testi deneme sınavları'}
                 {selectedCategory === 'ayt' && 'Alan Yeterlilik Testi deneme sınavları'}
                 {selectedCategory === 'branş' && 'Branş bazlı deneme sınavları'}
@@ -171,10 +171,10 @@ export default function Denemeler() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {denemePaketleri[selectedCategory].map((deneme) => (
-                <div key={deneme.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div key={deneme.id} className="bg-white dark:bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-transparent dark:border-slate-700">
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-semibold text-gray-900">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-slate-100">
                         {deneme.title}
                       </h3>
                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -186,7 +186,7 @@ export default function Denemeler() {
                       </span>
                     </div>
 
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-600 dark:text-slate-300 mb-4">
                       {deneme.description}
                     </p>
 
@@ -195,18 +195,18 @@ export default function Denemeler() {
                         <div className="text-2xl font-bold text-blue-600">
                           {deneme.questionCount}
                         </div>
-                        <div className="text-sm text-gray-600">Soru</div>
+                        <div className="text-sm text-gray-600 dark:text-slate-300">Soru</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-blue-600">
                           {deneme.duration}
                         </div>
-                        <div className="text-sm text-gray-600">Dakika</div>
+                        <div className="text-sm text-gray-600 dark:text-slate-300">Dakika</div>
                       </div>
                     </div>
 
                     <div className="mb-4">
-                      <h4 className="text-sm font-medium text-gray-900 mb-2">Konular:</h4>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-slate-100 mb-2">Konular:</h4>
                       <div className="flex flex-wrap gap-2">
                         {deneme.subjects.map((subject, index) => (
                           <span
@@ -220,7 +220,7 @@ export default function Denemeler() {
                     </div>
 
                     <div className="flex justify-between items-center">
-                      <div className="text-2xl font-bold text-gray-900">
+                      <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">
                         ₺{deneme.price}
                       </div>
                       <Link
