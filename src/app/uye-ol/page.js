@@ -2,363 +2,138 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { auth, db } from '@/firebase';
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { useToast } from '@/components/ToastProvider';
 
 export default function UyeOl() {
+  const { addToast } = useToast();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
+    agreeTerms: false,
     phone: '',
     school: '',
-    grade: '',
-    agreeTerms: false
+    grade: ''
   });
 
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit(e) {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+    setErrors(prev => ({ ...prev, [name]: '' }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Form validasyonu
-    const newErrors = {};
-    
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'Ad alanı zorunludur';
-    }
-    
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Soyad alanı zorunludur';
-    }
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'E-posta alanı zorunludur';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Geçerli bir e-posta adresi girin';
-    }
-    
-    if (!formData.password) {
-      newErrors.password = 'Şifre alanı zorunludur';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Şifre en az 6 karakter olmalıdır';
-    }
-    
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Şifreler eşleşmiyor';
-    }
-    
-    if (!formData.agreeTerms) {
-      newErrors.agreeTerms = 'Kullanım şartlarını kabul etmelisiniz';
-    }
-    
-    setErrors(newErrors);
-    
-    if (Object.keys(newErrors).length === 0) {
-      // Form gönderme işlemi
-      alert('Hesabınız başarıyla oluşturuldu!');
-      // Burada API çağrısı yapılacak
-    }
-  }
+    setIsLoading(true);
 
-  function handleChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    const type = e.target.type;
-    const checked = e.target.checked;
-    
-    const newFormData = Object.assign({}, formData);
-    newFormData[name] = type === 'checkbox' ? checked : value;
-    setFormData(newFormData);
-    
-    // Hata mesajını temizle
-    if (errors[name]) {
-      const newErrors = Object.assign({}, errors);
-      newErrors[name] = '';
-      setErrors(newErrors);
+    const newErrors = {};
+    if (!formData.firstName.trim()) newErrors.firstName = 'Ad zorunludur';
+    if (!formData.lastName.trim()) newErrors.lastName = 'Soyad zorunludur';
+    if (!formData.email.trim()) newErrors.email = 'E-posta zorunludur';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Geçerli e-posta girin';
+    if (!formData.password) newErrors.password = 'Şifre zorunludur';
+    else if (formData.password.length < 6) newErrors.password = 'Şifre en az 6 karakter';
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Şifreler eşleşmiyor';
+    if (!formData.agreeTerms) newErrors.agreeTerms = 'Kullanım şartlarını kabul etmelisiniz';
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      setIsLoading(false);
+      return;
     }
-  }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const user = userCredential.user;
+
+      await sendEmailVerification(user);
+
+      // Firestore'a ekstra bilgileri kaydet
+      await setDoc(doc(db, 'users', user.uid), {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone || null,
+        school: formData.school || null,
+        grade: formData.grade || null,
+        createdAt: serverTimestamp()
+      });
+
+      addToast('Hesabınız oluşturuldu! Lütfen e-posta doğrulamasını tamamlayın.', 'success');
+
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        agreeTerms: false,
+        phone: '',
+        school: '',
+        grade: ''
+      });
+    } catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
+        addToast('Bu e-posta zaten kayıtlı. Giriş yapmayı deneyin veya şifrenizi sıfırlayın.', 'error');
+      } else {
+        addToast(err.message || 'Kayıt sırasında hata oluştu', 'error');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 text-gray-900 dark:text-slate-100">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4">
-            Üye Ol
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-slate-300">
-            Ücretsiz hesap oluşturun ve deneme sınavlarına başlayın
-          </p>
-        </div>
+    <div className="min-h-screen flex justify-center items-center bg-gray-50 dark:bg-slate-900">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-md w-full max-w-md space-y-4">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Üye Ol</h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Registration Form */}
-          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 border border-transparent dark:border-slate-700">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
-              Hesap Bilgileri
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                    Ad *
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
-                      errors.firstName ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
-                    }`}
-                    placeholder="Adınız"
-                  />
-                  {errors.firstName && (
-                    <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
-                  )}
-                </div>
+        <input type="text" name="firstName" placeholder="Ad" value={formData.firstName} onChange={handleChange} className="w-full px-3 py-2 border rounded-md" />
+        {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
 
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                    Soyad *
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
-                      errors.lastName ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
-                    }`}
-                    placeholder="Soyadınız"
-                  />
-                  {errors.lastName && (
-                    <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
-                  )}
-                </div>
-              </div>
+        <input type="text" name="lastName" placeholder="Soyad" value={formData.lastName} onChange={handleChange} className="w-full px-3 py-2 border rounded-md" />
+        {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                  E-posta *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
-                    errors.email ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
-                  }`}
-                  placeholder="ornek@email.com"
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                )}
-              </div>
+        <input type="email" name="email" placeholder="E-posta" value={formData.email} onChange={handleChange} className="w-full px-3 py-2 border rounded-md" />
+        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                  Telefon
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400"
-                  placeholder="0555 123 45 67"
-                />
-              </div>
+        <input type="password" name="password" placeholder="Şifre" value={formData.password} onChange={handleChange} className="w-full px-3 py-2 border rounded-md" />
+        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                    Şifre *
-                  </label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
-                      errors.password ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
-                    }`}
-                    placeholder="En az 6 karakter"
-                  />
-                  {errors.password && (
-                    <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-                  )}
-                </div>
+        <input type="password" name="confirmPassword" placeholder="Şifre Tekrar" value={formData.confirmPassword} onChange={handleChange} className="w-full px-3 py-2 border rounded-md" />
+        {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
 
-                <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                    Şifre Tekrar *
-                  </label>
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 ${
-                      errors.confirmPassword ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
-                    }`}
-                    placeholder="Şifrenizi tekrar girin"
-                  />
-                  {errors.confirmPassword && (
-                    <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>
-                  )}
-                </div>
-              </div>
+        {/* Ek bilgiler */}
+        <input type="text" name="phone" placeholder="Telefon (opsiyonel)" value={formData.phone} onChange={handleChange} className="w-full px-3 py-2 border rounded-md" />
+        <input type="text" name="school" placeholder="Okul (opsiyonel)" value={formData.school} onChange={handleChange} className="w-full px-3 py-2 border rounded-md" />
+        <input type="text" name="grade" placeholder="Kaçıncı sınıf? (opsiyonel)" value={formData.grade} onChange={handleChange} className="w-full px-3 py-2 border rounded-md" />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="school" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                    Okul
-                  </label>
-                  <input
-                    type="text"
-                    id="school"
-                    name="school"
-                    value={formData.school}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400"
-                    placeholder="Okul adınız"
-                  />
-                </div>
+        <label className="flex items-center space-x-2">
+          <input type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} className="w-4 h-4" />
+          <span className="text-gray-700 dark:text-slate-300">Kullanım şartlarını kabul ediyorum</span>
+        </label>
+        {errors.agreeTerms && <p className="text-red-500 text-sm">{errors.agreeTerms}</p>}
 
-                <div>
-                  <label htmlFor="grade" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                    Sınıf
-                  </label>
-                  <select
-                    id="grade"
-                    name="grade"
-                    value={formData.grade}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100"
-                  >
-                    <option value="">Sınıf seçin</option>
-                    <option value="9">9. Sınıf</option>
-                    <option value="10">10. Sınıf</option>
-                    <option value="11">11. Sınıf</option>
-                    <option value="12">12. Sınıf</option>
-                    <option value="mezun">Mezun</option>
-                  </select>
-                </div>
-              </div>
+        <button type="submit" disabled={isLoading} className="w-full bg-blue-600 text-white py-2 rounded-md disabled:bg-blue-400">
+          {isLoading ? 'Yükleniyor...' : 'Üye Ol'}
+        </button>
 
-              <div className="flex items-start">
-                <input
-                  type="checkbox"
-                  id="agreeTerms"
-                  name="agreeTerms"
-                  checked={formData.agreeTerms}
-                  onChange={handleChange}
-                  className="mt-1 mr-3"
-                />
-                <label htmlFor="agreeTerms" className="text-sm text-gray-600 dark:text-slate-300">
-                  <Link href="/kullanim-sartlari" className="text-blue-600 hover:underline">
-                    Kullanım şartlarını
-                  </Link> ve{' '}
-                  <Link href="/gizlilik-politikasi" className="text-blue-600 hover:underline">
-                    gizlilik politikasını
-                  </Link> kabul ediyorum. *
-                </label>
-              </div>
-              {errors.agreeTerms && (
-                <p className="text-red-500 text-sm">{errors.agreeTerms}</p>
-              )}
-
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-              >
-                Hesap Oluştur
-              </button>
-            </form>
-          </div>
-
-          {/* Benefits */}
-          <div className="space-y-6">
-            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 border border-transparent dark:border-slate-700">
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
-                Üyelik Avantajları
-              </h2>
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <div className="bg-green-100 dark:bg-green-950 p-2 rounded-lg mr-4">
-                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">Ücretsiz Denemeler</h3>
-                    <p className="text-gray-600 dark:text-slate-300 text-sm">Tüm deneme sınavlarına ücretsiz erişim</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-green-100 dark:bg-green-950 p-2 rounded-lg mr-4">
-                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">Detaylı Analiz</h3>
-                    <p className="text-gray-600 dark:text-slate-300 text-sm">Performansınızı detaylı analiz edin</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-green-100 dark:bg-green-950 p-2 rounded-lg mr-4">
-                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">İlerleme Takibi</h3>
-                    <p className="text-gray-600 dark:text-slate-300 text-sm">Gelişiminizi takip edin</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-green-100 dark:bg-green-950 p-2 rounded-lg mr-4">
-                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">7/24 Destek</h3>
-                    <p className="text-gray-600 dark:text-slate-300 text-sm">Her zaman yanınızdayız</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-50 dark:bg-slate-800 rounded-lg p-6 border border-transparent dark:border-slate-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">
-                Zaten Hesabınız Var mı?
-              </h3>
-              <p className="text-gray-600 dark:text-slate-300 mb-4">
-                Hesabınız varsa giriş yaparak deneme sınavlarına başlayabilirsiniz.
-              </p>
-              <Link
-                href="/giris-yap"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center block"
-              >
-                Giriş Yap
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+        <p className="text-sm text-gray-600 dark:text-slate-300">
+          Zaten hesabınız var mı? <Link href="/giris-yap" className="text-blue-600">Giriş Yap</Link>
+        </p>
+      </form>
     </div>
   );
 }
