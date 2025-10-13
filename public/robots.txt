@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://www.rekabetci.netlify.app/sitemap.xml
