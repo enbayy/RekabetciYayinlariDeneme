@@ -4,31 +4,19 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="mt-12 border-t border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur">
+    <footer className="border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-12 text-slate-600 dark:text-slate-300">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* Brand + Newsletter */}
+          {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src="/rbylogo2.png" alt="Rekabetçi Yayınları" className="h-9 w-auto block dark:hidden" />
-              <img src="/rbylogo.png" alt="Rekabetçi Yayınları" className="h-9 w-auto hidden dark:block" />
+              <img src="/rbylogo.png" alt="Rekabetçi Yayınları" className="h-9 w-auto block dark:hidden" />
+              <img src="/rbylogo2.png" alt="Rekabetçi Yayınları" className="h-9 w-auto hidden dark:block" />
               <span className="font-semibold text-slate-900 dark:text-slate-100">Rekabetçi Yayınları</span>
             </div>
-            <p className="text-sm leading-relaxed mb-4">
+            <p className="text-sm leading-relaxed">
               YKS, TYT, AYT ve branş denemeleri ile gerçek sınav deneyimi, detaylı analiz ve gelişim takibi.
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="mt-4">
-              <label htmlFor="newsletter" className="text-xs block mb-2">Güncellemeleri alın</label>
-              <div className="flex items-stretch gap-2">
-                <input
-                  id="newsletter"
-                  type="email"
-                  placeholder="E-posta adresiniz"
-                  className="flex-1 px-3 py-2 rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                />
-                <button type="submit" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm">Abone Ol</button>
-              </div>
-            </form>
           </div>
 
           {/* Company */}
@@ -45,9 +33,9 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 tracking-wide mb-4">Kaynaklar</h3>
             <ul className="space-y-3 text-sm">
-              <li><Link href="/" className="hover:text-blue-600">Blog (yakında)</Link></li>
-              <li><Link href="/" className="hover:text-blue-600">Sık Sorulanlar</Link></li>
-              <li><Link href="/" className="hover:text-blue-600">Kılavuzlar</Link></li>
+              <li><Link href="/blog" className="hover:text-blue-600">Blog</Link></li>
+              <li><Link href="/sss" className="hover:text-blue-600">Sık Sorulanlar</Link></li>
+              <li><Link href="/kilavuzlar" className="hover:text-blue-600">Kılavuzlar</Link></li>
             </ul>
           </div>
 

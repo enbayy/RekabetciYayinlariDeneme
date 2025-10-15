@@ -9,11 +9,13 @@ body {
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light dark;
 }
 
 .dark {
   --background: #0b1020; /* dark background */
   --foreground: #e5e7eb; /* light foreground */
+  color-scheme: dark;
 }
 
 @theme inline {
