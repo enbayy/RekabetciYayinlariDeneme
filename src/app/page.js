@@ -1,6 +1,9 @@
+"use client";
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Home() {
+  const [selectedPlan, setSelectedPlan] = useState(null); // { name: string, price: string }
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
       {/* Hero Section */}
@@ -25,7 +28,7 @@ export default function Home() {
             </h1>
             <p className="text-lg md:text-xl mb-8 max-w-4xl mx-auto leading-relaxed text-slate-600 dark:text-slate-300">
               YKS, TYT, AYT ve branş denemeleri ile sınavlara hazırlanın. 
-              <span className="text-blue-700 font-semibold">Gerçek sınav deneyimi</span> yaşayın ve 
+              <span className="text-blue-700 font-semibold"> Gerçek sınav deneyimi</span> yaşayın ve 
               <span className="text-blue-700 font-semibold"> performansınızı ölçün</span>.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
@@ -133,49 +136,74 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-24 bg-gray-50 dark:bg-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-6">
-              Nasıl Çalışır?
+      <section className="py-24 bg-gray-50 dark:bg-slate-950 relative">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.04]">
+          <div className="h-full w-full bg-[radial-gradient(circle_at_20%_20%,#1d4ed8_0,transparent_30%),radial-gradient(circle_at_80%_30%,#7c3aed_0,transparent_30%)]"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-slate-900 px-4 py-1.5 text-sm font-semibold text-blue-700 dark:text-slate-300 border border-blue-100 dark:border-slate-700 mb-5">Nasıl Çalışır?</div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-4">
+              3 Adımda Başlayın
             </h2>
-            <p className="text-xl text-gray-600 dark:text-slate-300 max-w-3xl mx-auto">
-              Sadece 3 adımda deneme sınavlarına başlayın ve başarınızı artırın
+            <p className="text-lg md:text-xl text-gray-600 dark:text-slate-300 max-w-3xl mx-auto">
+              Sadece üç basit adım ile deneme sınavlarına başlayın ve gelişiminizi takip edin.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                1
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {/* Step 1 */}
+            <div className="relative">
+              <div className="h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-lg shadow">
+                      1
+                    </div>
+                    <span className="absolute -right-1 -bottom-1 w-4 h-4 bg-white dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700"></span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100">Üye Ol</h3>
+                </div>
+                <p className="text-gray-600 dark:text-slate-300 leading-relaxed">
+                  Ücretsiz hesap oluşturun ve profil bilgilerinizi tamamlayın. Sadece birkaç dakika sürer.
+                </p>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Üye Ol</h3>
-              <p className="text-gray-600 text-lg">
-                Ücretsiz hesap oluşturun ve profil bilgilerinizi tamamlayın. 
-                Sadece birkaç dakika sürer.
-              </p>
             </div>
 
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                2
+            {/* Step 2 */}
+            <div className="relative">
+              <div className="h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-lg shadow">
+                      2
+                    </div>
+                    <span className="absolute -right-1 -bottom-1 w-4 h-4 bg-white dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700"></span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100">Deneme Seç</h3>
+                </div>
+                <p className="text-gray-600 dark:text-slate-300 leading-relaxed">
+                  TYT, AYT veya branş denemelerinden birini seçin. Size uygun olanı bulun ve başlayın.
+                </p>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Deneme Seç</h3>
-              <p className="text-gray-600 text-lg">
-                TYT, AYT veya branş denemelerinden birini seçin. 
-                Size uygun olanı bulun ve başlayın.
-              </p>
             </div>
 
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                3
+            {/* Step 3 */}
+            <div className="relative">
+              <div className="h-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-lg shadow">
+                      3
+                    </div>
+                    <span className="absolute -right-1 -bottom-1 w-4 h-4 bg-white dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700"></span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100">Analiz Et</h3>
+                </div>
+                <p className="text-gray-600 dark:text-slate-300 leading-relaxed">
+                  Sonuçlarınızı detaylı analiz edin ve gelişim alanlarınızı keşfedin. Bir sonraki adımınızı planlayın.
+                </p>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Analiz Et</h3>
-              <p className="text-gray-600 text-lg">
-                Sonuçlarınızı detaylı analiz edin ve gelişim alanlarınızı keşfedin. 
-                Bir sonraki adımınızı planlayın.
-              </p>
             </div>
           </div>
         </div>
@@ -194,7 +222,7 @@ export default function Home() {
           </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-transparent dark:border-slate-700">
+            <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-transparent dark:border-slate-700 flex flex-col h-full">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
                   A
@@ -208,12 +236,12 @@ export default function Home() {
                 "Bu platform sayesinde TYT'de 50 puan artırdım. 
                 Gerçek sınav deneyimi yaşamak çok faydalı oldu."
               </p>
-              <div className="flex text-yellow-400 mt-4">
+              <div className="flex text-yellow-400 mt-4 mt-auto">
                 ⭐⭐⭐⭐⭐
               </div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-transparent dark:border-slate-700">
+            <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-transparent dark:border-slate-700 flex flex-col h-full">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">
                   E
@@ -227,12 +255,12 @@ export default function Home() {
                 "Detaylı analizler sayesinde eksik konularımı fark ettim. 
                 Çok profesyonel bir platform."
               </p>
-              <div className="flex text-yellow-400 mt-4">
+              <div className="flex text-yellow-400 mt-4 mt-auto">
                 ⭐⭐⭐⭐⭐
               </div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-transparent dark:border-slate-700">
+            <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-transparent dark:border-slate-700 flex flex-col h-full">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold">
                   M
@@ -246,7 +274,7 @@ export default function Home() {
                 "Matematik branş denemeleri çok kaliteli. 
                 Zaman yönetimimi geliştirdim."
               </p>
-              <div className="flex text-yellow-400 mt-4">
+              <div className="flex text-yellow-400 mt-4 mt-auto">
                 ⭐⭐⭐⭐⭐
               </div>
             </div>
@@ -267,94 +295,79 @@ export default function Home() {
           </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-transparent dark:border-slate-700">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-4">Ücretsiz</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-6">₺0</div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>5 Deneme Sınavı</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>Temel Analiz</span>
-          </li>
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>E-posta Desteği</span>
-          </li>
-              </ul>
-              <Link
-                href="/uye-ol"
-                className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center block"
-              >
-                Başla
-              </Link>
-            </div>
-
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border-2 border-blue-600 relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-                  En Popüler
-                </span>
+              {/* Başlangıç Paketi */}
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border-2 ${selectedPlan?.name === 'Başlangıç' ? 'border-blue-600' : 'border-slate-200 dark:border-slate-700'} flex flex-col h-full`}>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1">Başlangıç</h3>
+                <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm">Yeni başlayanlar için temel içerikler</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">₺19<span className="text-lg text-gray-600 dark:text-slate-300">/ay</span></div>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>Ayda 20 deneme</span></li>
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>Temel analiz</span></li>
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>E-posta desteği</span></li>
+                </ul>
+                <button
+                  onClick={() => setSelectedPlan({ name: 'Başlangıç', price: '19' })}
+                  className={`mt-auto w-full font-semibold py-3 px-6 rounded-lg transition-colors text-center block ${selectedPlan?.name === 'Başlangıç' ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-gray-600 hover:bg-gray-700 text-white'}`}
+                >
+                  Seç
+                </button>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-4">Premium</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-6">₺29<span className="text-lg text-gray-600 dark:text-slate-300">/ay</span></div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>Sınırsız Deneme</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>Detaylı Analiz</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>Öncelikli Destek</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>Mobil Uygulama</span>
-                </li>
-              </ul>
-              <Link
-                href="/uye-ol"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center block"
-              >
-                Seç
-              </Link>
+
+              {/* Premium Paketi */}
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border-2 relative ${selectedPlan?.name === 'Premium' ? 'border-blue-600' : 'border-slate-200 dark:border-slate-700'} flex flex-col h-full`}>
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">En Popüler</span>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1">Premium</h3>
+                <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm">Sınırsız erişim ve ileri analizler</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">₺29<span className="text-lg text-gray-600 dark:text-slate-300">/ay</span></div>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>Sınırsız deneme</span></li>
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>Detaylı analiz</span></li>
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>Öncelikli destek</span></li>
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>Mobil uygulama</span></li>
+                </ul>
+                <button
+                  onClick={() => setSelectedPlan({ name: 'Premium', price: '29' })}
+                  className={`mt-auto w-full font-semibold py-3 px-6 rounded-lg transition-colors text-center block ${selectedPlan?.name === 'Premium' ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-gray-600 hover:bg-gray-700 text-white'}`}
+                >
+                  Seç
+                </button>
+              </div>
+
+              {/* Pro Paketi (Kurumsal yerine) */}
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border-2 ${selectedPlan?.name === 'Pro' ? 'border-blue-600' : 'border-slate-200 dark:border-slate-700'} flex flex-col h-full`}>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1">Pro</h3>
+                <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm">Yoğun pilotaj ve derin raporlama</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">₺49<span className="text-lg text-gray-600 dark:text-slate-300">/ay</span></div>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>Özel denemeler</span></li>
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>Gelişmiş raporlama</span></li>
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>7/24 destek</span></li>
+                  <li className="flex items-center"><span className="text-green-500 mr-3">✓</span><span>API entegrasyonu</span></li>
+                </ul>
+                <button
+                  onClick={() => setSelectedPlan({ name: 'Pro', price: '49' })}
+                  className={`mt-auto w-full font-semibold py-3 px-6 rounded-lg transition-colors text-center block ${selectedPlan?.name === 'Pro' ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-gray-600 hover:bg-gray-700 text-white'}`}
+                >
+                  Seç
+                </button>
+              </div>
             </div>
 
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-transparent dark:border-slate-700">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-4">Kurumsal</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-6">Özel</div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>Özel Denemeler</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>Raporlama</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>7/24 Destek</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="text-green-500 mr-3">✓</span>
-                  <span>API Entegrasyonu</span>
-                </li>
-              </ul>
+            {/* Ödeme CTA */}
+            <div className="mt-8 text-center">
               <Link
-                href="/iletisim"
-                className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center block"
+                href={selectedPlan ? { pathname: '/odeme', query: { plan: selectedPlan.name, price: selectedPlan.price } } : '#'}
+                className={`inline-block px-10 py-4 rounded-xl font-bold transition-colors ${selectedPlan ? 'bg-blue-700 hover:bg-blue-800 text-white' : 'bg-slate-300 text-slate-500 cursor-not-allowed'}`}
+                aria-disabled={!selectedPlan}
               >
-                İletişim
+                Ödemeye Geç
               </Link>
+              {!selectedPlan && (
+                <p className="mt-3 text-sm text-slate-500">Lütfen önce bir paket seçin.</p>
+              )}
             </div>
-          </div>
         </div>
       </section>
 
@@ -366,8 +379,8 @@ export default function Home() {
           </h2>
           <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto">
             Ücretsiz hesap oluşturun ve deneme sınavlarına başlayın. 
-            <span className="text-blue-200 font-semibold">Başarınız</span> için 
-            <span className="text-blue-200 font-semibold">bugün</span> harekete geçin!
+            <span className="text-blue-200 font-semibold"> Başarınız</span> için 
+            <span className="text-blue-200 font-semibold"> bugün</span> harekete geçin!
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
@@ -382,12 +395,6 @@ export default function Home() {
             >
               📚 Denemeleri İncele
             </Link>
-          </div>
-          
-          <div className="mt-12 text-blue-200">
-            <p className="text-lg">
-              💡 <strong>İpucu:</strong> İlk deneme sınavınızda %20 indirim kazanın!
-            </p>
           </div>
         </div>
       </section>

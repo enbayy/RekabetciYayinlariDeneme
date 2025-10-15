@@ -35,7 +35,8 @@ export default function Denemeler() {
     tyt: [
       { id: 1, title: 'TYT Genel Deneme Paketi', description: 'Temel Yeterlilik Testi için kapsamlı deneme paketi', questionCount: 120, duration: 135, price: 29.99, difficulty: 'Orta', subjects: ['Türkçe', 'Matematik', 'Fen Bilimleri', 'Sosyal Bilimler'] },
       { id: 2, title: 'TYT Matematik Odaklı', description: 'Matematik ağırlıklı TYT deneme paketi', questionCount: 120, duration: 135, price: 24.99, difficulty: 'Zor', subjects: ['Matematik', 'Geometri', 'Türkçe', 'Fen Bilimleri'] },
-      { id: 3, title: 'TYT Hızlandırılmış', description: 'Hızlı çözüm teknikleri ile TYT denemeleri', questionCount: 120, duration: 120, price: 19.99, difficulty: 'Kolay', subjects: ['Türkçe', 'Matematik', 'Fen Bilimleri', 'Sosyal Bilimler'] }
+      { id: 3, title: 'TYT Hızlandırılmış', description: 'Hızlı çözüm teknikleri ile TYT denemeleri', questionCount: 120, duration: 120, price: 19.99, difficulty: 'Kolay', subjects: ['Türkçe', 'Matematik', 'Fen Bilimleri', 'Sosyal Bilimler'] },
+      { id: 10, title: 'TYT Ücretsiz Deneme', description: 'Platformu denemek için ücretsiz deneme', questionCount: 40, duration: 50, price: 0, difficulty: 'Kolay', subjects: ['Türkçe', 'Matematik'] }
     ],
     ayt: [
       { id: 4, title: 'AYT Sayısal Deneme Paketi', description: 'Sayısal öğrenciler için özel AYT deneme paketi', questionCount: 160, duration: 180, price: 39.99, difficulty: 'Zor', subjects: ['Matematik', 'Fizik', 'Kimya', 'Biyoloji'] },
@@ -111,13 +112,15 @@ export default function Denemeler() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {denemePaketleri[selectedCategory].map((deneme) => (
-                <div key={deneme.id} className="bg-white dark:bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-transparent dark:border-slate-700">
+                <div key={deneme.id} className="group relative bg-white dark:bg-slate-800 rounded-2xl shadow-md hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700 overflow-hidden">
+                  {/* Accent top bar */}
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-500" />
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-slate-100">
                         {deneme.title}
                       </h3>
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-semibold tracking-wide ${
                         deneme.difficulty === 'Kolay' ? 'bg-green-100 text-green-800' :
                         deneme.difficulty === 'Orta' ? 'bg-yellow-100 text-yellow-800' :
                         'bg-red-100 text-red-800'
@@ -126,32 +129,33 @@ export default function Denemeler() {
                       </span>
                     </div>
 
-                    <p className="text-gray-600 dark:text-slate-300 mb-4">
+                    <p className="text-gray-600 dark:text-slate-300 mb-5 leading-relaxed">
                       {deneme.description}
                     </p>
 
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">
+                    <div className="grid grid-cols-2 gap-4 mb-5">
+                      <div className="text-center rounded-xl border border-slate-200 dark:border-slate-700 p-3 bg-slate-50/60 dark:bg-slate-900/40">
+                        <div className="text-xs uppercase tracking-wide text-slate-500 mb-1">Soru</div>
+                        <div className="text-2xl font-extrabold text-blue-600">
                           {deneme.questionCount}
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-slate-300">Soru</div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">
+                      <div className="text-center rounded-xl border border-slate-200 dark:border-slate-700 p-3 bg-slate-50/60 dark:bg-slate-900/40">
+                        <div className="text-xs uppercase tracking-wide text-slate-500 mb-1">Süre</div>
+                        <div className="text-2xl font-extrabold text-blue-600">
                           {deneme.duration}
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-slate-300">Dakika</div>
+                        <div className="text-xs text-slate-500">Dakika</div>
                       </div>
                     </div>
 
                     <div className="mb-4">
-                      <h4 className="text-sm font-medium text-gray-900 dark:text-slate-100 mb-2">Konular:</h4>
+                      <h4 className="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-2">Konular</h4>
                       <div className="flex flex-wrap gap-2">
                         {deneme.subjects.map((subject, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
+                            className="px-2.5 py-1 bg-blue-50 dark:bg-slate-900/50 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-slate-700 text-xs rounded-full"
                           >
                             {subject}
                           </span>
@@ -159,16 +163,25 @@ export default function Denemeler() {
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center">
-                      <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">
-                        ₺{deneme.price}
+                    <div className="flex items-center justify-between mt-5">
+                      <div className="text-2xl font-extrabold text-gray-900 dark:text-slate-100">
+                        {deneme.price === 0 ? 'Ücretsiz' : `₺${deneme.price}`}
                       </div>
-                      <button
-                        onClick={() => handleStartClick(deneme.id)}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
-                      >
-                        Denemeye Başla
-                      </button>
+                      {deneme.price === 0 ? (
+                        <button
+                          onClick={() => handleStartClick(deneme.id)}
+                          className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-all shadow-sm hover:shadow-md active:scale-[0.99]"
+                        >
+                          Ücretsiz Başla
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => router.push(`/odeme?plan=${encodeURIComponent(deneme.title)}&price=${encodeURIComponent(deneme.price)}`)}
+                          className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-all shadow-sm hover:shadow-md active:scale-[0.99]"
+                        >
+                          Satın Al
+                        </button>
+                      )}
                     </div>
 
                   </div>
