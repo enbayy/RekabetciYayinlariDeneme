@@ -7,75 +7,101 @@ export default function DenemeSınavıClient({ params }) {
   const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [timeLeft, setTimeLeft] = useState(135 * 60); // 135 dakika
+  const isFreeTYT = String(params?.id) === '10';
+
+  // Süre: Ücretsiz TYT deneme 50 dk, diğerleri 135 dk
+  const initialDurationSeconds = isFreeTYT ? 50 * 60 : 135 * 60;
+  const [timeLeft, setTimeLeft] = useState(initialDurationSeconds);
   const [isExamStarted, setIsExamStarted] = useState(false);
   const [questionTimes, setQuestionTimes] = useState({});
   const [questionStartTimes, setQuestionStartTimes] = useState({});
   const [examStartTime, setExamStartTime] = useState(null);
 
   // Örnek sorular
-  const questions = [
-    {
-      id: 1,
-      question: "Aşağıdaki cümlelerin hangisinde 'de' bağlacı yanlış yazılmıştır?",
-      options: [
-        "A) Sen de gel, biz de gelelim.",
-        "B) Kitap da okurum, dergi de.",
-        "C) O da geldi, ben de gittim.",
-        "D) Hem sen de hem ben de çalışırız."
-      ],
-      correctAnswer: 1,
-      subject: "Türkçe"
-    },
-    {
-      id: 2,
-      question: "2x + 3y = 12 denkleminin çözümü aşağıdakilerden hangisidir?",
-      options: [
-        "A) x = 3, y = 2",
-        "B) x = 2, y = 3", 
-        "C) x = 6, y = 0",
-        "D) x = 0, y = 4"
-      ],
-      correctAnswer: 0,
-      subject: "Matematik"
-    },
-    {
-      id: 3,
-      question: "Hangi element periyodik tabloda 1. periyotta yer alır?",
-      options: [
-        "A) Hidrojen",
-        "B) Lityum",
-        "C) Sodyum",
-        "D) Potasyum"
-      ],
-      correctAnswer: 0,
-      subject: "Kimya"
-    },
-    {
-      id: 4,
-      question: "Osmanlı Devleti'nin kurucusu kimdir?",
-      options: [
-        "A) Orhan Gazi",
-        "B) Osman Gazi",
-        "C) Mehmet Çelebi",
-        "D) Murat Hüdavendigar"
-      ],
-      correctAnswer: 1,
-      subject: "Tarih"
-    },
-    {
-      id: 5,
-      question: "Türkiye'nin en yüksek dağı hangisidir?",
-      options: [
-        "A) Erciyes Dağı",
-        "B) Süphan Dağı",
-        "C) Ağrı Dağı",
-        "D) Kaçkar Dağı"
-      ],
-      correctAnswer: 2,
-      subject: "Coğrafya"
+  const questions = (function buildQuestions() {
+    if (isFreeTYT) {
+      const subjectsPool = ["Türkçe", "Matematik", "Fen Bilimleri", "Sosyal Bilimler"];
+      const arr = [];
+      for (let i = 1; i <= 40; i++) {
+        const subject = subjectsPool[(i - 1) % subjectsPool.length];
+        arr.push({
+          id: i,
+          question: `Soru ${i}: ${subject} alanında örnek çoktan seçmeli soru metni.`,
+          options: [
+            "A) Seçenek A",
+            "B) Seçenek B",
+            "C) Seçenek C",
+            "D) Seçenek D"
+          ],
+          correctAnswer: (i - 1) % 4,
+          subject
+        });
+      }
+      return arr;
     }
-  ];
+    return [
+      {
+        id: 1,
+        question: "Aşağıdaki cümlelerin hangisinde 'de' bağlacı yanlış yazılmıştır?",
+        options: [
+          "A) Sen de gel, biz de gelelim.",
+          "B) Kitap da okurum, dergi de.",
+          "C) O da geldi, ben de gittim.",
+          "D) Hem sen de hem ben de çalışırız."
+        ],
+        correctAnswer: 1,
+        subject: "Türkçe"
+      },
+      {
+        id: 2,
+        question: "2x + 3y = 12 denkleminin çözümü aşağıdakilerden hangisidir?",
+        options: [
+          "A) x = 3, y = 2",
+          "B) x = 2, y = 3", 
+          "C) x = 6, y = 0",
+          "D) x = 0, y = 4"
+        ],
+        correctAnswer: 0,
+        subject: "Matematik"
+      },
+      {
+        id: 3,
+        question: "Hangi element periyodik tabloda 1. periyotta yer alır?",
+        options: [
+          "A) Hidrojen",
+          "B) Lityum",
+          "C) Sodyum",
+          "D) Potasyum"
+        ],
+        correctAnswer: 0,
+        subject: "Kimya"
+      },
+      {
+        id: 4,
+        question: "Osmanlı Devleti'nin kurucusu kimdir?",
+        options: [
+          "A) Orhan Gazi",
+          "B) Osman Gazi",
+          "C) Mehmet Çelebi",
+          "D) Murat Hüdavendigar"
+        ],
+        correctAnswer: 1,
+        subject: "Tarih"
+      },
+      {
+        id: 5,
+        question: "Türkiye'nin en yüksek dağı hangisidir?",
+        options: [
+          "A) Erciyes Dağı",
+          "B) Süphan Dağı",
+          "C) Ağrı Dağı",
+          "D) Kaçkar Dağı"
+        ],
+        correctAnswer: 2,
+        subject: "Coğrafya"
+      }
+    ];
+  })();
 
   // Timer efekti
   useEffect(() => {
@@ -193,8 +219,8 @@ export default function DenemeSınavıClient({ params }) {
                 </h2>
                 <div className="text-sm text-blue-800 dark:text-blue-300 space-y-1">
                   <p><strong>Soru Sayısı:</strong> {questions.length}</p>
-                  <p><strong>Süre:</strong> 135 dakika</p>
-                  <p><strong>Konular:</strong> Türkçe, Matematik, Kimya, Tarih, Coğrafya</p>
+                  <p><strong>Süre:</strong> {Math.floor(initialDurationSeconds / 60)} dakika</p>
+                  <p><strong>Konular:</strong> {Array.from(new Set(questions.map(q => q.subject))).join(', ')}</p>
                 </div>
               </div>
             </div>
@@ -226,9 +252,9 @@ export default function DenemeSınavıClient({ params }) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-slate-100">
       {/* Header */}
-      <div className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700">
+      <div className="">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex justify-between items-center py-6">
             <div>
               <h1 className="text-xl font-semibold text-gray-900 dark:text-slate-100">
                 Deneme Sınavı

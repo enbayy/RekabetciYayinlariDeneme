@@ -25,6 +25,14 @@ export default function Denemeler() {
     }
   };
 
+  const handleBuyClick = (deneme) => {
+    if (!user) {
+      router.push('/giris-yap'); // Giriş yapılmadıysa login sayfasına yönlendir
+    } else {
+      router.push(`/odeme?plan=${encodeURIComponent(deneme.title)}&price=${encodeURIComponent(deneme.price)}`);
+    }
+  };
+
   const categories = [
     { id: 'tyt', name: 'TYT Denemeleri' },
     { id: 'ayt', name: 'AYT Denemeleri' },
@@ -113,8 +121,13 @@ export default function Denemeler() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {denemePaketleri[selectedCategory].map((deneme) => (
                 <div key={deneme.id} className="group relative bg-white dark:bg-slate-800 rounded-2xl shadow-md hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700 overflow-hidden">
-                  {/* Accent top bar */}
-                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-500" />
+                  <div className={`absolute inset-x-0 top-0 h-1 ${
+                    deneme.difficulty === 'Kolay'
+                      ? 'bg-gradient-to-r from-green-500 to-emerald-600'
+                      : deneme.difficulty === 'Orta'
+                      ? 'bg-gradient-to-r from-yellow-400 to-amber-500'
+                      : 'bg-gradient-to-r from-red-500 to-rose-600'
+                  }`} />
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-slate-100">
@@ -167,21 +180,16 @@ export default function Denemeler() {
                       <div className="text-2xl font-extrabold text-gray-900 dark:text-slate-100">
                         {deneme.price === 0 ? 'Ücretsiz' : `₺${deneme.price}`}
                       </div>
-                      {deneme.price === 0 ? (
-                        <button
-                          onClick={() => handleStartClick(deneme.id)}
-                          className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-all shadow-sm hover:shadow-md active:scale-[0.99]"
-                        >
-                          Ücretsiz Başla
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => router.push(`/odeme?plan=${encodeURIComponent(deneme.title)}&price=${encodeURIComponent(deneme.price)}`)}
-                          className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-all shadow-sm hover:shadow-md active:scale-[0.99]"
-                        >
-                          Satın Al
-                        </button>
-                      )}
+                      <button
+                        onClick={() => deneme.price === 0 ? handleStartClick(deneme.id) : handleBuyClick(deneme)}
+                        className={`inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold transition-all shadow-sm hover:shadow-md active:scale-[0.99] ${
+                          deneme.price === 0
+                            ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                            : 'bg-blue-600 hover:bg-blue-700 text-white'
+                        }`}
+                      >
+                        {deneme.price === 0 ? 'Ücretsiz Başla' : 'Satın Al'}
+                      </button>
                     </div>
 
                   </div>
