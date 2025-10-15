@@ -88,21 +88,16 @@ export default function Iletisim() {
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
                   Konu
                 </label>
-                <select
+                <input
+                  type="text"
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100"
-                >
-                  <option value="">Konu seçin</option>
-                  <option value="genel">Genel Bilgi</option>
-                  <option value="teknik">Teknik Destek</option>
-                  <option value="odeneme">Ödeme Sorunu</option>
-                  <option value="oneriler">Öneriler</option>
-                  <option value="diger">Diğer</option>
-                </select>
+                  placeholder="Konu başlığını girin"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400"
+                />
               </div>
 
               <div>

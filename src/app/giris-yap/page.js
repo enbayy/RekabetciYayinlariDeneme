@@ -120,25 +120,12 @@ export default function GirisYap() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
           <div className="hidden lg:block lg:col-span-2">
             <div className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-slate-700 p-6 h-full shadow-sm">
-            <h3 className="text-xl font-semibold mb-3">Neden Rekabetçi Yayınları?</h3>
-            <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
-              <li className="flex items-start gap-2">
-                <span className="mt-1 h-2 w-2 rounded-full bg-blue-600"></span>
-                Her seviyeye uygun, güncel müfredata göre hazırlanmış deneme sınavları
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1 h-2 w-2 rounded-full bg-blue-600"></span>
-                Net, süre, başarı oranı ve konu analizi gibi detaylı performans raporları
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1 h-2 w-2 rounded-full bg-blue-600"></span>
-                Uzman öğretmenler tarafından titizlikle hazırlanmış özgün içerikler
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1 h-2 w-2 rounded-full bg-blue-600"></span>
-                Türkiye genelinde binlerce öğrencinin güvendiği güçlü deneme altyapısı
-              </li>
-            </ul>
+              <h3 className="text-xl font-semibold mb-3">Neden Rekabetçi Yayınları?</h3>
+              <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-blue-600"></span>Gerçek sınav formatında denemeler ve ayrıntılı analizler</li>
+                <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-blue-600"></span>Kişiselleştirilmiş geribildirim ve gelişim takibi</li>
+                <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-blue-600"></span>Aydınlık/Karanlık tema ve modern arayüz</li>
+              </ul>
               <div className="mt-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-600 p-4 text-sm">
                 <p className="text-slate-600 dark:text-slate-300">Hesabınız yoksa hemen <Link href="/uye-ol" className="text-blue-600 hover:underline">üye olun</Link> ve ücretsiz içerikleri keşfedin.</p>
               </div>

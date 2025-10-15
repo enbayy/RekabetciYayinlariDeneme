@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { auth } from '@/firebase';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { FiUser } from 'react-icons/fi';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +12,6 @@ export default function Navbar() {
   const [user, setUser] = useState(null);
   const [toasts, setToasts] = useState([]);
 
-  // Toast fonksiyonu
   const addToast = (message, type = 'success') => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
@@ -26,7 +26,6 @@ export default function Navbar() {
       setIsDark(hasDarkClass);
     } catch (_) {}
 
-    // Firebase kullanıcı dinleyicisi
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
         setUser(currentUser);
@@ -82,7 +81,7 @@ export default function Navbar() {
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-2 left-1/2 transform -translate-x-1/2 w-[95%] lg:w-[90%] bg-white/95 dark:bg-slate-900/90 backdrop-blur-md shadow-md border-b border-slate-200 dark:border-slate-700 rounded-xl z-50 transition-all">
+      <nav className="fixed top-2 inset-x-2 md:inset-x-auto md:left-1/2 md:transform md:-translate-x-1/2 md:w-[95%] lg:w-[90%] bg-white/95 dark:bg-slate-900/90 backdrop-blur-md shadow-md border-b border-slate-200 dark:border-slate-700 rounded-xl z-50 transition-all">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-2 flex justify-between items-center">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -126,13 +125,11 @@ export default function Navbar() {
               className="flex items-center justify-center rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-800 transition-all"
             >
               {isDark ? (
-                // ☀️ Güneş ikonu (dark mod aktifken)
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="5" />
                   <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
                 </svg>
               ) : (
-                // 🌙 Ay ikonu (light mod aktifken)
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                 </svg>
@@ -140,23 +137,32 @@ export default function Navbar() {
             </button>
 
             {user ? (
-              <button
-                onClick={handleSignOut}
-                className="bg-red-600 text-white hover:bg-red-700 px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md"
-              >
-                Çıkış Yap
-              </button>
+              <>
+                <Link
+                  href="/profile"
+                  onClick={closeMenu}
+                  className="bg-transparent text-black dark:text-white flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                >
+                  <FiUser className="h-5 w-5" />
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="bg-red-600 text-white hover:bg-red-700 px-4 py-1 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md"
+                >
+                  Çıkış Yap
+                </button>
+              </>
             ) : (
               <>
                 <Link
                   href="/uye-ol"
-                  className="text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-400 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                  className="text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1 rounded-lg text-sm font-medium transition-all duration-200"
                 >
                   Üye Ol
                 </Link>
                 <Link
                   href="/giris-yap"
-                  className="bg-blue-700 text-white hover:bg-blue-800 px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md"
+                  className="bg-blue-700 text-white hover:bg-blue-800 px-4 py-1 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md"
                 >
                   Giriş Yap
                 </Link>
@@ -178,7 +184,7 @@ export default function Navbar() {
                 </svg>
               )}
             </button>
-            <button onClick={toggleMenu} className="text-slate-700 dark:text-slate-200 p-2">
+            <button onClick={toggleMenu} className="text-slate-700 dark:text-slate-200 p-2 text-xl font-bold">
               {isMenuOpen ? '✖️' : '☰'}
             </button>
           </div>
@@ -186,47 +192,58 @@ export default function Navbar() {
 
         {/* Mobil Menü */}
         {isMenuOpen && (
-          <div className="md:hidden px-4 py-3 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-700 flex flex-col gap-2 rounded-b-xl">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                className="text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 block px-4 py-2 rounded-lg text-base font-medium transition-all duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
+  <div className="md:hidden px-2 py-2 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-700 flex flex-col gap-2 rounded-b-xl">
+    {navLinks.map((link) => (
+      <Link
+        key={link.href}
+        href={link.href}
+        onClick={closeMenu}
+        className="w-full text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-center"
+      >
+        {link.label}
+      </Link>
+    ))}
 
-            <div className="mt-2 flex flex-col gap-2">
-              {user ? (
-                <button
-                  onClick={() => { handleSignOut(); closeMenu(); }}
-                  className="bg-red-600 text-white hover:bg-red-700 block px-4 py-2 rounded-lg text-base font-semibold transition-all duration-200"
-                >
-                  Çıkış Yap
-                </button>
-              ) : (
-                <>
-                  <Link
-                    href="/uye-ol"
-                    onClick={closeMenu}
-                    className="text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-400 block px-4 py-2 rounded-lg text-base font-medium transition-all duration-200"
-                  >
-                    Üye Ol
-                  </Link>
-                  <Link
-                    href="/giris-yap"
-                    onClick={closeMenu}
-                    className="bg-blue-700 text-white hover:bg-blue-800 block px-4 py-2 rounded-lg text-base font-semibold transition-all duration-200"
-                  >
-                    Giriş Yap
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        )}
+    <div className="mt-2 flex flex-col gap-2 items-center">
+      {user ? (
+        <>
+          <Link
+            href="/profile"
+            onClick={closeMenu}
+            className="bg-blue-800 hover:bg-blue-700 text-white flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+          >
+            <FiUser className="h-4 w-4" />
+            Profil
+          </Link>
+          <button
+            onClick={() => { handleSignOut(); closeMenu(); }}
+            className="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
+          >
+            Çıkış Yap
+          </button>
+        </>
+      ) : (
+        <>
+          <Link
+            href="/uye-ol"
+            onClick={closeMenu}
+            className="w-full text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-center"
+          >
+            Üye Ol
+          </Link>
+          <Link
+            href="/giris-yap"
+            onClick={closeMenu}
+            className="w-full bg-blue-700 text-white hover:bg-blue-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-center"
+          >
+            Giriş Yap
+          </Link>
+        </>
+      )}
+    </div>
+  </div>
+)}
+
       </nav>
 
       {/* Navbar yüksekliği kadar boşluk */}
