@@ -42,4 +42,3 @@ const turkceFreeQuestions = [
 
 export default turkceFreeQuestions;
 
-
