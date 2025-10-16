@@ -167,12 +167,12 @@ export default function DrawingOverlay({
   }, [drawingsMap, tool, color, size, currentQuestion, enabled]);
 
   return (
-    <div ref={containerRef} className="relative w-full">
+    <div ref={containerRef} className="relative w-full touch-none overscroll-contain">
       {children}
       {enabled && (
         <canvas
           ref={canvasRef}
-          className={`${active ? 'cursor-crosshair' : 'pointer-events-none'} absolute inset-0 w-full h-full z-10`}
+          className={`${active ? 'cursor-crosshair' : 'pointer-events-none'} absolute inset-0 w-full h-full z-10 touch-none`}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
