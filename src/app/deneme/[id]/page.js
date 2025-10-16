@@ -12,7 +12,10 @@ export function generateStaticParams() {
     { id: '7' },
     { id: '8' },
     { id: '9' },
-    { id: '10' }
+    { id: '10' },
+    { id: '11' }, // Ücretsiz Türkçe branş
+    { id: '12' }, // Ücretsiz Matematik branş
+    { id: '13' }  // Ücretsiz Fen branş
   ];
 }
 

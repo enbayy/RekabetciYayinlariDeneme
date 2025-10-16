@@ -52,6 +52,9 @@ export default function Denemeler() {
       { id: 6, title: 'AYT Sözel Paketi', description: 'Sözel öğrenciler için kapsamlı AYT denemeleri', questionCount: 160, duration: 180, price: 39.99, difficulty: 'Orta', subjects: ['Türk Dili ve Edebiyatı', 'Tarih', 'Coğrafya', 'Felsefe'] }
     ],
     branş: [
+      { id: 11, title: 'Ücretsiz Türkçe Branş Denemesi', description: 'Türkçe için ücretsiz deneme', questionCount: 3, duration: 60, price: 0, difficulty: 'Kolay', subjects: ['Türkçe'] },
+      { id: 12, title: 'Ücretsiz Matematik Branş Denemesi', description: 'Matematik için ücretsiz deneme', questionCount: 3, duration: 60, price: 0, difficulty: 'Kolay', subjects: ['Matematik'] },
+      { id: 13, title: 'Ücretsiz Fen Branş Denemesi', description: 'Fen Bilimleri için ücretsiz deneme', questionCount: 3, duration: 60, price: 0, difficulty: 'Kolay', subjects: ['Fen Bilimleri'] },
       { id: 7, title: 'Matematik Branş Denemeleri', description: 'Sadece matematik sorularından oluşan deneme paketi', questionCount: 40, duration: 60, price: 14.99, difficulty: 'Orta', subjects: ['Matematik', 'Geometri'] },
       { id: 8, title: 'Fizik Branş Denemeleri', description: 'Fizik konularına odaklanmış deneme paketi', questionCount: 40, duration: 60, price: 14.99, difficulty: 'Zor', subjects: ['Fizik'] },
       { id: 9, title: 'Türkçe Branş Denemeleri', description: 'Türkçe dil bilgisi ve anlam bilgisi denemeleri', questionCount: 40, duration: 60, price: 14.99, difficulty: 'Orta', subjects: ['Türkçe'] }
@@ -118,9 +121,9 @@ export default function Denemeler() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
               {denemePaketleri[selectedCategory].map((deneme) => (
-                <div key={deneme.id} className="group relative bg-white dark:bg-slate-800 rounded-2xl shadow-md hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div key={deneme.id} className="group relative bg-white dark:bg-slate-800 rounded-2xl shadow-md hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700 overflow-hidden h-full flex flex-col">
                   <div className={`absolute inset-x-0 top-0 h-1 ${
                     deneme.difficulty === 'Kolay'
                       ? 'bg-gradient-to-r from-green-500 to-emerald-600'
@@ -128,7 +131,7 @@ export default function Denemeler() {
                       ? 'bg-gradient-to-r from-yellow-400 to-amber-500'
                       : 'bg-gradient-to-r from-red-500 to-rose-600'
                   }`} />
-                  <div className="p-6">
+                  <div className="p-6 h-full flex flex-col">
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-slate-100">
                         {deneme.title}
@@ -147,17 +150,13 @@ export default function Denemeler() {
                     </p>
 
                     <div className="grid grid-cols-2 gap-4 mb-5">
-                      <div className="text-center rounded-xl border border-slate-200 dark:border-slate-700 p-3 bg-slate-50/60 dark:bg-slate-900/40">
+                      <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 bg-slate-50/60 dark:bg-slate-900/40 flex flex-col items-center justify-center text-center">
                         <div className="text-xs uppercase tracking-wide text-slate-500 mb-1">Soru</div>
-                        <div className="text-2xl font-extrabold text-blue-600">
-                          {deneme.questionCount}
-                        </div>
+                        <div className="text-2xl font-extrabold text-blue-600">{deneme.questionCount}</div>
                       </div>
-                      <div className="text-center rounded-xl border border-slate-200 dark:border-slate-700 p-3 bg-slate-50/60 dark:bg-slate-900/40">
+                      <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 bg-slate-50/60 dark:bg-slate-900/40 flex flex-col items-center justify-center text-center">
                         <div className="text-xs uppercase tracking-wide text-slate-500 mb-1">Süre</div>
-                        <div className="text-2xl font-extrabold text-blue-600">
-                          {deneme.duration}
-                        </div>
+                        <div className="text-2xl font-extrabold text-blue-600">{deneme.duration}</div>
                         <div className="text-xs text-slate-500">Dakika</div>
                       </div>
                     </div>
@@ -176,7 +175,7 @@ export default function Denemeler() {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mt-5">
+                    <div className="flex items-center justify-between mt-auto pt-4">
                       <div className="text-2xl font-extrabold text-gray-900 dark:text-slate-100">
                         {deneme.price === 0 ? 'Ücretsiz' : `₺${deneme.price}`}
                       </div>
