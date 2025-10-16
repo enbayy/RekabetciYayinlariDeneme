@@ -1,37 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase';
+import { useToast } from '@/components/ToastProvider';
 
 export default function Denemeler() {
   const [selectedCategory, setSelectedCategory] = useState('tyt');
-  const [user, setUser] = useState(null);
   const router = useRouter();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleStartClick = (denemeId) => {
-    if (!user) {
-      router.push('/giris-yap'); // Giriş yapılmadıysa login sayfasına yönlendir
-    } else {
-      router.push(`/deneme/${denemeId}`); // Giriş yapıldıysa denemeye git
-    }
-  };
-
-  const handleBuyClick = (deneme) => {
-    if (!user) {
-      router.push('/giris-yap'); // Giriş yapılmadıysa login sayfasına yönlendir
-    } else {
-      router.push(`/odeme?plan=${encodeURIComponent(deneme.title)}&price=${encodeURIComponent(deneme.price)}`);
-    }
-  };
+  const { addToast } = useToast();
 
   const categories = [
     { id: 'tyt', name: 'TYT Denemeleri' },
@@ -59,6 +36,38 @@ export default function Denemeler() {
       { id: 8, title: 'Fizik Branş Denemeleri', description: 'Fizik konularına odaklanmış deneme paketi', questionCount: 40, duration: 60, price: 14.99, difficulty: 'Zor', subjects: ['Fizik'] },
       { id: 9, title: 'Türkçe Branş Denemeleri', description: 'Türkçe dil bilgisi ve anlam bilgisi denemeleri', questionCount: 40, duration: 60, price: 14.99, difficulty: 'Orta', subjects: ['Türkçe'] }
     ]
+  };
+
+  const handleStartClick = (denemeId) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      router.push('/giris-yap');
+      return;
+    }
+
+    if (!currentUser.emailVerified) {
+      addToast("E-posta doğrulanmamış. Lütfen doğrulayın.", "error");
+      return;
+    }
+
+    router.push(`/deneme/${denemeId}`);
+  };
+
+  const handleBuyClick = (deneme) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      router.push('/giris-yap');
+      return;
+    }
+
+    if (!currentUser.emailVerified) {
+      addToast("E-posta doğrulanmamış. Lütfen doğrulayın.", "error");
+      return;
+    }
+
+    router.push(`/odeme?plan=${encodeURIComponent(deneme.title)}&price=${encodeURIComponent(deneme.price)}`);
   };
 
   return (
