@@ -17,10 +17,10 @@ export default function Sonuc() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Sonuçlar yükleniyor...</p>
+          <p className="text-gray-600 dark:text-slate-300">Sonuçlar yükleniyor...</p>
         </div>
       </div>
     );
@@ -28,12 +28,12 @@ export default function Sonuc() {
 
   if (!examData) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-4">
             Sonuç Bulunamadı
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-slate-300 mb-6">
             Henüz bir sınav tamamlamadınız.
           </p>
           <Link
@@ -83,25 +83,25 @@ export default function Sonuc() {
   const totalParticipants = 1500;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 text-gray-900 dark:text-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4">
             Sınav Sonuçları
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 dark:text-slate-300">
             Deneme sınavınız tamamlandı. Performansınızı inceleyin.
           </p>
         </div>
 
         {/* Overall Score */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 mb-8 border border-transparent dark:border-slate-700">
           <div className="text-center">
             <div className="text-6xl font-bold text-blue-600 mb-2">
               {score}
             </div>
-            <div className="text-2xl text-gray-600 mb-6">
+            <div className="text-2xl text-gray-600 dark:text-slate-300 mb-6">
               Puan
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -109,25 +109,25 @@ export default function Sonuc() {
                 <div className="text-3xl font-bold text-green-600 mb-1">
                   {correctAnswers}
                 </div>
-                <div className="text-gray-600">Doğru</div>
+                <div className="text-gray-600 dark:text-slate-300">Doğru</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-red-600 mb-1">
                   {wrongAnswers}
                 </div>
-                <div className="text-gray-600">Yanlış</div>
+                <div className="text-gray-600 dark:text-slate-300">Yanlış</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-gray-600 mb-1">
                   {emptyAnswers}
                 </div>
-                <div className="text-gray-600">Boş</div>
+                <div className="text-gray-600 dark:text-slate-300">Boş</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600 mb-1">
                   {totalTimeSpent}
                 </div>
-                <div className="text-gray-600">Dakika</div>
+                <div className="text-gray-600 dark:text-slate-300">Dakika</div>
               </div>
             </div>
           </div>
@@ -135,19 +135,19 @@ export default function Sonuc() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Ranking */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 border border-transparent dark:border-slate-700">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
               Sıralama
             </h2>
             <div className="text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">
                 #{rank}
               </div>
-              <div className="text-gray-600 mb-4">
+              <div className="text-gray-600 dark:text-slate-300 mb-4">
                 {totalParticipants} kişi arasında
               </div>
-              <div className="bg-blue-50 rounded-lg p-4">
-                <div className="text-sm text-blue-800">
+              <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4">
+                <div className="text-sm text-blue-800 dark:text-blue-300">
                   <strong>Yüzdelik Dilim:</strong> %{Math.round((rank / totalParticipants) * 100)}
                 </div>
               </div>
@@ -155,28 +155,28 @@ export default function Sonuc() {
           </div>
 
           {/* Subject Performance */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 border border-transparent dark:border-slate-700">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
               Konu Bazlı Performans
             </h2>
             <div className="space-y-4">
               {Object.entries(subjectPerformance).map(([subject, data]) => {
                 const percentage = Math.round((data.correct / data.total) * 100);
                 return (
-                  <div key={subject} className="border rounded-lg p-4">
+                  <div key={subject} className="border border-slate-200 dark:border-slate-700 rounded-lg p-4">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="font-medium text-gray-900">{subject}</span>
-                      <span className="text-sm text-gray-600">
+                      <span className="font-medium text-gray-900 dark:text-slate-100">{subject}</span>
+                      <span className="text-sm text-gray-600 dark:text-slate-300">
                         {data.correct}/{data.total}
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
                       <div
                         className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm text-gray-600 mt-1">
+                    <div className="text-sm text-gray-600 dark:text-slate-300 mt-1">
                       %{percentage}
                     </div>
                   </div>
@@ -187,8 +187,8 @@ export default function Sonuc() {
         </div>
 
         {/* Question Analysis */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mt-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 mt-8 border border-transparent dark:border-slate-700">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6">
             Soru Analizi
           </h2>
           <div className="space-y-4">
@@ -198,9 +198,9 @@ export default function Sonuc() {
               const timeSpent = examData.questionTimes[index] || 0;
               
               return (
-                <div key={index} className="border rounded-lg p-4">
+                <div key={index} className="border border-slate-200 dark:border-slate-700 rounded-lg p-4">
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-sm font-medium text-gray-600">
+                    <span className="text-sm font-medium text-gray-600 dark:text-slate-300">
                       Soru {index + 1} - {question.subject}
                     </span>
                     <div className="flex items-center space-x-2">
@@ -209,30 +209,30 @@ export default function Sonuc() {
                       }`}>
                         {isCorrect ? 'Doğru' : 'Yanlış'}
                       </span>
-                      <span className="text-xs text-gray-500">
-                        {Math.floor(timeSpent / 60)}:{(timeSpent % 60).toString().padStart(2, '0')}
+                      <span className="text-xs text-gray-500 dark:text-slate-400">
+                        {timeSpent > 0 ? `${Math.floor(timeSpent / 60)}:${(timeSpent % 60).toString().padStart(2, '0')}` : '0:00'}
                       </span>
                     </div>
                   </div>
-                  <p className="text-gray-900 mb-2">{question.question}</p>
+                  <p className="text-gray-900 dark:text-slate-100 mb-2">{question.question}</p>
                   <div className="space-y-1">
                     {question.options.map((option, optionIndex) => (
                       <div
                         key={optionIndex}
                         className={`text-sm p-2 rounded ${
                           optionIndex === question.correctAnswer
-                            ? 'bg-green-50 text-green-800'
+                            ? 'bg-green-50 dark:bg-green-950 text-green-800 dark:text-green-300'
                             : optionIndex === userAnswer && !isCorrect
-                            ? 'bg-red-50 text-red-800'
-                            : 'bg-gray-50 text-gray-600'
+                            ? 'bg-red-50 dark:bg-red-950 text-red-800 dark:text-red-300'
+                            : 'bg-gray-50 dark:bg-slate-700 text-gray-600 dark:text-slate-200'
                         }`}
                       >
                         {option}
                         {optionIndex === question.correctAnswer && (
-                          <span className="ml-2 text-green-600 font-medium">✓ Doğru Cevap</span>
+                          <span className="ml-2 text-green-600 dark:text-green-300 font-medium">✓ Doğru Cevap</span>
                         )}
                         {optionIndex === userAnswer && !isCorrect && (
-                          <span className="ml-2 text-red-600 font-medium">✗ Sizin Cevabınız</span>
+                          <span className="ml-2 text-red-600 dark:text-red-300 font-medium">✗ Sizin Cevabınız</span>
                         )}
                       </div>
                     ))}
@@ -260,7 +260,7 @@ export default function Sonuc() {
             </button>
             <Link
               href="/"
-              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors dark:border-blue-500 dark:text-blue-400 dark:hover:bg-blue-600 dark:hover:text-white"
             >
               Ana Sayfaya Dön
             </Link>

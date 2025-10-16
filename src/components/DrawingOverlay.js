@@ -5,9 +5,9 @@ import { useEffect, useRef } from 'react';
 export default function DrawingOverlay({
   enabled,
   active,
-  tool,
   color,
   size,
+  tool,
   currentQuestion,
   drawingsMap,
   setDrawingsMap,
@@ -91,8 +91,23 @@ export default function DrawingOverlay({
     if (!enabled || !active) return;
     e.preventDefault();
     const pos = getRelativePos(e);
+
+    if (tool === 'eraser2') {
+      const paths = drawingsMap[currentQuestion] || [];
+      const updatedPaths = paths.filter((path) => {
+        return !path.points.some((p) => {
+          const dx = p.x - pos.x;
+          const dy = p.y - pos.y;
+          return Math.sqrt(dx * dx + dy * dy) < 10;
+        });
+      });
+      setDrawingsMap((prev) => ({ ...prev, [currentQuestion]: updatedPaths }));
+      redrawAll();
+      return;
+    }
+
     currentPathRef.current = {
-      tool,
+      tool: tool === 'eraser1' ? 'eraser' : 'pen',
       color,
       size,
       points: [pos]
@@ -131,23 +146,15 @@ export default function DrawingOverlay({
     ctx.restore();
   }
 
-  function handlePointerUp(e) {
+  function handlePointerUp() {
     if (!isPointerDownRef.current || !currentPathRef.current) return;
-    e.preventDefault();
     const finishedPath = currentPathRef.current;
     currentPathRef.current = null;
     isPointerDownRef.current = false;
-    setDrawingsMap(prev => {
+    setDrawingsMap((prev) => {
       const prevPaths = prev[currentQuestion] || [];
       return { ...prev, [currentQuestion]: [...prevPaths, finishedPath] };
     });
-  }
-
-  function handlePointerCancel(e) {
-    if (!isPointerDownRef.current) return;
-    e.preventDefault();
-    currentPathRef.current = null;
-    isPointerDownRef.current = false;
   }
 
   useEffect(() => {
@@ -164,24 +171,25 @@ export default function DrawingOverlay({
   useEffect(() => {
     if (!enabled) return;
     redrawAll();
-  }, [drawingsMap, tool, color, size, currentQuestion, enabled]);
+  }, [drawingsMap, color, size, currentQuestion, enabled, tool]);
 
   return (
     <div ref={containerRef} className="relative w-full touch-none overscroll-contain">
       {children}
+
       {enabled && (
         <canvas
           ref={canvasRef}
-          className={`${active ? 'cursor-crosshair' : 'pointer-events-none'} absolute inset-0 w-full h-full z-10 touch-none`}
+          className={`${
+            active ? 'cursor-crosshair' : 'pointer-events-none'
+          } absolute inset-0 w-full h-full z-10 touch-none`}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          onPointerLeave={handlePointerCancel}
-          onPointerCancel={handlePointerCancel}
+          onPointerLeave={handlePointerUp}
+          onPointerCancel={handlePointerUp}
         />
       )}
     </div>
   );
 }
-
-
